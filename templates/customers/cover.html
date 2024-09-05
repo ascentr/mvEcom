@@ -1,0 +1,38 @@
+{% load static %}
+
+<div class="page-section restaurant-detail-image-section background-header">
+    <!-- Container Start -->
+    <div class="container">
+      <!-- Row Start -->
+      <div class="row">
+        <!-- Column Start -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="company-info-detail">
+            <div class="company-info">
+              <div class="img-holder">
+                <figure>
+                  {% if customer.user_profile_picture %}
+                  <img src="{{ user_profile.profile_picture.url }}" alt="">
+                  {% else %}
+                  <img src="{% static 'extra-images/customer-default.PNG' %}" alt="">
+                  {% endif %}
+
+                </figure>
+              </div>
+
+              <div class="text-holder">
+                <span class="restaurant-title"> Name : {{ user.first_name }} {{ user.last_name }}</span>
+                <div class="text">
+                  <i class="icon-location"></i>
+                  <p>Tel : 01132 123 215  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Column End -->
+      </div>
+      <!-- Row End -->
+    </div>
+    <!-- Container End -->
+  </div>

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content  %}
+{% include 'includes/alerts.html' %}
+
+<!-- Main Section Start -->
+<div class="main-section">
+<!--load the top cover banner here -->
+  {% include 'includes/cover.html' %}
+
+  <div class="page-section account-header buyer-logged-in">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+<!-- load the sidebar here -->
+        {% include 'includes/sidebar-v.html' %}
+        </div>
+
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+          <div class="user-dashboard loader-holder">
+            <div class="user-holder">
+<!--Add Category Form -->
+              <hr>
+              <h6> Add Product: </h6>
+              <form action="{% url 'vendor:add-product' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-fields-set">
+                  <div class="row">
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                      <div class="field-holder">
+                        <label>Category*</label>
+                        {{ form.category }}
+                      </div>
+                    </div>
+
+                    <div class="col-lg-8 col-md-8 col-sm-12">
+                      <div class="field-holder">
+                        <label>Product Name *</label>
+                        {{ form.title }}
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="field-holder">
+                        <label>Description *</label>
+                        {{ form.description}}
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="field-holder">
+                        <label>Price *</label>
+                        {{form.price}}
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="field-holder">
+                        <label>Image *</label>
+                        {{form.image}}
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <div class="field-holder">
+                        <label>Is Available ? </label>
+                        {{form.is_available}}
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                  <ul>
+                    {% for field in form %}
+                      {% if field.errors %}
+                        {% for error in field.errors %}
+                          <li style="background-color:pink; color:brown;  padding: 2px 5px;">
+                            {{ error }} in the {{ field }} field
+                          </li>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                        <li style="background-color:pink; color:brown;  padding: 0 5px; ">
+                          {{form.non_field_errors}}
+                        </li>
+                  </ul>
+
+
+                  <button type="submit" class="btn btn-info">
+                    <i class="fa fa-check" aria-hidden="true"></i> Create 
+                  </button>
+                </div>
+
+ 
+
+              </form>
+
+            </div>
+<!--End Form -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Main Section End -->
+
+
+
+{% endblock %}

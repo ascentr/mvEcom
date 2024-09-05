@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content  %}
+{% include 'includes/alerts.html' %}
+<!-- Main Section Start -->
+<div class="main-section">
+<!--load the top cover banner here -->
+  {% include 'includes/cover.html' %}
+
+  <div class="page-section account-header buyer-logged-in">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+<!-- load the sidebar here -->
+        {% include 'includes/sidebar-v.html' %}
+        </div>
+
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+          <div class="user-dashboard loader-holder">
+            <div class="user-holder">
+<!--Menu Builder -->
+              <button class="btn btn-secondary" onclick="history.back()"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button> 
+              <a href="{% url 'vendor:add-product' %}" class="btn btn-success float-right m-1"><i class="fa-solid fa-plus"></i> Add Item </a>
+              <a href="{% url 'vendor:add-category' %}" class="btn btn-info float-right m-1"><i class="fa-solid fa-plus"></i> Add Category</a>
+              <hr>
+              <h5>Products by Category</h5>
+
+              <h6>Category: <span class="text-uppercase text-success">  {{ category }} </h6>
+              
+              {% if products %}
+              <table class="table table-hover table-borderless">
+                <tbody>
+                  {% for product in products %}
+                    <tr>
+                      <td class="text-left">{{ forloop.counter }}</td>
+                      <td> <img class="thumbnail" src="{{product.image.url}}" alt="Profile Picture" width="40px"> </td>
+                      <td class="text-left">
+                        <a href="#">
+                          <p class="mb-0 font-weight-bold">{{ product.title }}</p>
+                          <small class="text-muted"></small> 
+                        </a>
+                      </td>
+                      <td>
+                        {% if product.is_available %}
+                          <span class="badge rounded-pill bg-success">Available</span>
+                        {% else %}
+                          <span class="badge rounded-pill bg-warning">Not Available</span>
+                        {% endif %}
+                      </td>
+                      <td> 
+                        <a href="{% url 'vendor:edit-product' product.id %}" class="text-info mr-1"><i class="fa-solid fa-pencil"></i></a> 
+                        <a href="{% url 'vendor:delete-product' product.id %}" class="text-danger" onclick="return confirm('Are you sure you wish to delete this Product')"><i class="fa-solid fa-trash"></i></a> </a>  
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% else %}
+              <h5> No Products found </h5>
+
+              <a href="{% url 'vendor:add-product' %}"><i class="fa-solid fa-plus"></i> Add Product </a>
+              {% endif %}
+            </div>
+<!--End Menu Builder -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Main Section End -->
+
+
+
+{% endblock %}

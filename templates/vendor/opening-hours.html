@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content  %}
+{% include 'includes/alerts.html' %}
+
+
+<!-- Main Section Start -->
+<div class="main-section">
+<!--load the top cover banner here -->
+  {% include 'includes/cover.html' %}
+
+  <div class="page-section account-header buyer-logged-in">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+<!-- load the sidebar here -->
+        {% include 'includes/sidebar-v.html' %}
+        </div>
+<!-- Opening Hours -->
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+          <div class="user-dashboard loader-holder">
+            <div class="user-holder">
+              <h5 class=text-uppercase>Opening Hours</h5>
+                <table class="table opening-hours"  >
+                    <tbody>
+                        {% for h in opening_hours %} 
+                        <tr id="hour-{{h.id}}">
+                            <td><b>{{ h }}</b></td>
+                            <td> {% if h.is_closed %} CLOSED {%  else %}  {{h.from_hour}} - {{h.to_hour}}  {% endif %} </td>    
+                            <td> <a href="#" class="delete-hour" data-url="{% url 'vendor:delete-opening-hours' h.id %}">Remove </a></td>                      
+                        </tr>                   
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                <form id="opening-hours">
+                   {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-3">{{form.day}}</div>
+                        <div class="col-md-2">{{form.from_hour}}</div>
+                        <div class="col-md-2">{{form.to_hour}}</div>
+                        <div class="col-md-3">{{form.is_closed}} Set as closed</div>
+                        <input type="hidden" id="add-hours-url" value="{% url 'vendor:add-opening-hours'  %}">
+                        <div class="col-md-2"><button class="btn btn-success add-hour">Add Hours </button></div>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+<!-- eND Opening Hours -->
+    </div>
+    </div>
+  </div>
+</div>
+<!-- Main Section End -->
+
+
+
+{% endblock %}

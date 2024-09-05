@@ -1,0 +1,7 @@
+.vscode
+backup.json
+.env
+notes.txt
+*.pyc
+*.log
+__pycache__

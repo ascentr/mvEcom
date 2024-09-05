@@ -1,0 +1,12 @@
+{% autoescape off %}
+Hi {{ user.first_name }} ,
+{% if is_approved %}
+  Congratulation! Your shop has been approved by our admin Team.
+  Please login to your account to setup your products.  Thanks for choosing
+  Soukdaddy.com.
+{% else %}
+  We are sorry! You are not eligible for a shop on our platform, we like to thank you
+  for your interest.  Please contact support@soukdaddy.com for more details.
+{% endif %}
+
+{% endautoescape %}
